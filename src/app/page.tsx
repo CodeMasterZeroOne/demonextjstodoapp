@@ -1,13 +1,13 @@
 import { TodoItem } from '@/components/TodoItem'
 import { prisma } from '@/db'
-import { revalidateTag } from 'next/cache'
+import { revalidatePath, revalidateTag } from 'next/cache'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
 async function getTodos() {
   "use server"
   const res = await prisma.todos.findMany()
-  // console.log('returned res:', res)
+  console.log('returned res:', res)
   return res
 }
 async function toggleTodo(id: string, completed: boolean) {
@@ -19,12 +19,12 @@ async function removeTodo(id: string) {
   "use server"
   console.log('remove', id)
   await prisma.todos.delete({ where: { id } })
-  revalidateTag('todos')
+  revalidatePath('/')
+  // revalidateTag('todos')
   // redirect('/')
 }
 export default async function Home() {
   const allTodos = await getTodos()
-
   // await prisma.todos.create({ data: { title: 'Get this to working', completed: false } }) //to add stuff to database
   return (
     <>
@@ -37,7 +37,7 @@ export default async function Home() {
         {allTodos.length > 0 ? allTodos.map(todo => (
           <TodoItem key={todo.id} {...todo} toggleTodo={toggleTodo} removeTodo={removeTodo} />
         ))
-          : <div>Please add something to the list...</div>}
+          : <div>Please add some to do's...</div>}
       </ul>
     </>
   )

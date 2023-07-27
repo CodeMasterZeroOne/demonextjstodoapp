@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation"
 import { prisma } from "@/db"
 import Link from "next/link"
-import { revalidateTag } from "next/cache"
+import { revalidatePath, revalidateTag } from "next/cache"
 import Snackbar from "@/components/Snackbar"
 import { useState } from "react"
 
@@ -28,9 +28,9 @@ async function createTodo(data: FormData) {
             completed: false
         }
     })
-    // console.log('added new todo:', newTodo)
-    // revalidateTag('todos')
+    console.log('added new todo:', newTodo)
     redirect("/")
+    // revalidateTag('todos')
 }
 
 export default function page() {
