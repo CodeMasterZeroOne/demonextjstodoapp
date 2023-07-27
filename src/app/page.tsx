@@ -24,7 +24,6 @@ async function removeTodo(id: string) {
 }
 export default async function Home() {
   const allTodos = await getTodos()
-  // console.log('response', allTodos)
 
   // await prisma.todos.create({ data: { title: 'Get this to working', completed: false } }) //to add stuff to database
   return (
