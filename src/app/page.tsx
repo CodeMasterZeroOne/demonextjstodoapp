@@ -37,7 +37,7 @@ export default async function Home() {
         {allTodos.length > 0 ? allTodos.map(todo => (
           <TodoItem key={todo.id} {...todo} toggleTodo={toggleTodo} removeTodo={removeTodo} />
         ))
-          : <div>Please add some to do's...</div>}
+          : <div>Please add some to do&apos;s...</div>}
       </ul>
     </>
   )
