@@ -34,10 +34,10 @@ export default async function Home() {
 
       </header>
       <ul className='pl-4'>
-        {allTodos ? allTodos.map(todo => (
+        {allTodos.length > 0 ? allTodos.map(todo => (
           <TodoItem key={todo.id} {...todo} toggleTodo={toggleTodo} removeTodo={removeTodo} />
         ))
-          : null}
+          : <div>Please add something to the list...</div>}
       </ul>
     </>
   )
