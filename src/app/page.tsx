@@ -7,7 +7,7 @@ import { redirect } from 'next/navigation'
 async function getTodos() {
   "use server"
   const res = await prisma.todos.findMany()
-  console.log('returned res:', res)
+  // console.log('returned res:', res)
   return res
 }
 async function toggleTodo(id: string, completed: boolean) {
@@ -19,8 +19,8 @@ async function removeTodo(id: string) {
   "use server"
   console.log('remove', id)
   await prisma.todos.delete({ where: { id } })
-  revalidatePath('/')
-  // revalidateTag('todos')
+  // revalidatePath('/')
+  revalidateTag('todos')
   // redirect('/')
 }
 export default async function Home() {
